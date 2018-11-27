@@ -6,4 +6,12 @@ You can use this app directly if you'd like to see the finished app but before y
 
 If you'd like to follow the step by step codelab start with the [web-start](../web-start) directory.
 
+<<<<<<< HEAD
 1771033 심정민
+=======
+
+
+contributor minjeong
+
+kimminjeong 1771008
+>>>>>>> 0c68e02c50c3eca61e4caf682eec60533bda6c53

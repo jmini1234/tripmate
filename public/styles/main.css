@@ -177,7 +177,7 @@ main, #messages-card {
   }
   #user-container {
     top: 72px;
-    background-color: rgb(229, 157, 3);
+    background-color: pink;
     height: 38px;
     padding-top: 3px;
     padding-right: 2px;
@@ -190,10 +190,10 @@ main, #messages-card {
   }
 }
 .mdl-textfield__label:after {
-  background-color: #0288D1;
+  background-color: pink;
 }
 .mdl-textfield--floating-label.is-focused .mdl-textfield__label {
-  color: #0288D1;
+  color: pink;
 }
 .mdl-button .material-icons {
   top: -1px;
