@@ -41,12 +41,13 @@ function isUserSignedIn() {
 function loadMessages() {
   // Loads the last 12 messages and listen for new ones.
   var callback = function(snap) {
+    console.log(snap);
     var data = snap.val();
     displayMessage(snap.key, data.name, data.text, data.profilePicUrl, data.imageUrl);
   };
 
-  firebase.database().ref('/room1/').limitToLast(12).on('child_added', callback);
-  firebase.database().ref('/room1/').limitToLast(12).on('child_changed', callback);
+  firebase.database().ref('messages/room1/').limitToLast(12).on('child_added', callback);
+  firebase.database().ref('messages/room1/').limitToLast(12).on('child_changed', callback);
 }
 
 
@@ -316,5 +317,6 @@ mediaCaptureElement.addEventListener('change', onMediaFileSelected);
 // initialize Firebase
 initFirebaseAuth();
 
-// We load currently existing chat messages and listen to new ones.
+// We load currently exist
+//ing chat messages and listen to new ones.
 loadMessages();
