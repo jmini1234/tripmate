@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "friendychat-8920d",
+    "staging": "friendlychat-51387"
+  }
+}

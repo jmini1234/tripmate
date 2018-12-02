@@ -6,4 +6,3 @@ You can use this app directly if you'd like to see the finished app but before y
 
 If you'd like to follow the step by step codelab start with the [web-start](../web-start) directory.
 
-°í½ÂÀÇ

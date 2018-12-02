@@ -12,5 +12,11 @@
   "engines": {
     "node": "8"
   },
+  "hosting": {
+    "rewrites": [ {
+      "source": "**",
+      "destination": "/login.html"
+    } ]
+  },
   "private": true
 }

@@ -1,0 +1,25 @@
+[debug] [2018-12-02T08:54:22.426Z] ----------------------------------------------------------------------
+[debug] [2018-12-02T08:54:22.437Z] Command:       /usr/bin/node /usr/bin/firebase serve --only hosting
+[debug] [2018-12-02T08:54:22.438Z] CLI Version:   6.1.0
+[debug] [2018-12-02T08:54:22.438Z] Platform:      linux
+[debug] [2018-12-02T08:54:22.438Z] Node Version:  v8.11.4
+[debug] [2018-12-02T08:54:22.439Z] Time:          Sun Dec 02 2018 17:54:22 GMT+0900 (DST)
+[debug] [2018-12-02T08:54:22.440Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-12-02T08:54:22.484Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-12-02T08:54:22.486Z] > authorizing via signed-in user
+[debug] [2018-12-02T08:54:22.486Z] [iam] checking project friendlychat-51387 for permissions ["firebase.projects.get"]
+[debug] [2018-12-02T08:54:22.495Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/friendlychat-51387:testIamPermissions  
+
+[debug] [2018-12-02T08:54:23.500Z] <<< HTTP RESPONSE 200
+[debug] [2018-12-02T08:54:23.505Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/friendlychat-51387  
+ 
+[debug] [2018-12-02T08:54:24.415Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/mnt/c/tripmate_real/tripmate'...
+[info] 
+[debug] [2018-12-02T08:54:24.433Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/815204562143/clients/_:getWebAppConfig  
+ 
+[debug] [2018-12-02T08:54:25.334Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: ./public
+[info] ✔  hosting: Local server: http://localhost:5000
