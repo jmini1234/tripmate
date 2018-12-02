@@ -43,23 +43,18 @@ function loadMessages() {
   var callback = function(snap) {
     console.log(snap);
     var data = snap.val();
-    console.log(data);
-    for(var key in data){
-      console.log("roomtest : "+ key);
-    }
-  //  displayMessage(snap.key, data.name, data.text, data.profilePicUrl, data.imageUrl);
+    displayMessage(snap.key, data.name, data.text, data.profilePicUrl, data.imageUrl);
   };
 
-  firebase.database().ref('messages/').limitToLast(12).on('value', callback);
-//  firebase.database().ref('messages/').limitToLast(12).on('added', callback);
-//  firebase.database().ref('messages/').limitToLast(12).on('changed', callback);
+  firebase.database().ref('messages/room1/').limitToLast(12).on('child_added', callback);
+  firebase.database().ref('messages/room1/').limitToLast(12).on('child_changed', callback);
 }
 
 
 // Saves a new message on the Firebase DB.
 function saveMessage(messageText) {
   // Add a new message entry to the Firebase database.
-  return firebase.database().ref('messages/room1/').push({
+  return firebase.database().ref('/room1/').push({
     name: getUserName(),
     text: messageText,
     profilePicUrl: getProfilePicUrl()
@@ -72,7 +67,7 @@ function saveMessage(messageText) {
 // This first saves the image in Firebase storage.
 function saveImageMessage(file) {
   // 1 - We add a message with a loading icon that will get updated with the shared image.
-  firebase.database().ref('messages/room1/').push({
+  firebase.database().ref('/room1/').push({
     name: getUserName(),
     imageUrl: LOADING_IMAGE_URL,
     profilePicUrl: getProfilePicUrl()
@@ -266,6 +261,9 @@ function displayMessage(key, name, text, picUrl, imageUrl) {
   messageInputElement.focus();
 }
 
+function displayList() {
+
+}
 
 // Enables or disables the submit button depending on the values of the input
 // fields.
