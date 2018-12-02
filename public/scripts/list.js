@@ -7,6 +7,7 @@ function authStateObserver(user) {
     console.log("user is already");
   }
 }
+
  // Saves the messaging device token to the datastore.
 function saveMessagingDeviceToken() {
   firebase.messaging().getToken().then(function(currentToken) {
