@@ -1,3 +1,7 @@
+.firebaserc
+firebase.json
+firebase-debug.log
+
 # Logs
 logs
 *.log
