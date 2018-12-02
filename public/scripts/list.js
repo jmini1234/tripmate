@@ -61,11 +61,6 @@ function loadList() {  // Loads the last 12 messages and listen for new ones.
   };
 
   firebase.database().ref('messages/').limitToLast(12).on('value', callback);
-
-  // firebase.database().ref('messages/').limitToLast(12).on('child_added', callback);
-  // firebase.database().ref('messages/').limitToLast(12).on('child_changed', callback);
- // firebase.database().ref('messages/room1/').limitToLast(12).on('child_added', callback);
-  //firebase.database().ref('messages/room1/').limitToLast(12).on('child_changed', callback);
 }
 
 
@@ -73,6 +68,7 @@ var LIST_TEMPLATE =
     '<div class="list-container">' +
       '<div class="list"></div>'
     '</div>';
+    
 function displayList(roomlist) {
   console.log(roomlist);
 
