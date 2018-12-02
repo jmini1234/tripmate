@@ -1,25 +1,33 @@
-[debug] [2018-12-02T08:54:22.426Z] ----------------------------------------------------------------------
-[debug] [2018-12-02T08:54:22.437Z] Command:       /usr/bin/node /usr/bin/firebase serve --only hosting
-[debug] [2018-12-02T08:54:22.438Z] CLI Version:   6.1.0
-[debug] [2018-12-02T08:54:22.438Z] Platform:      linux
-[debug] [2018-12-02T08:54:22.438Z] Node Version:  v8.11.4
-[debug] [2018-12-02T08:54:22.439Z] Time:          Sun Dec 02 2018 17:54:22 GMT+0900 (DST)
-[debug] [2018-12-02T08:54:22.440Z] ----------------------------------------------------------------------
+[debug] [2018-12-02T10:06:02.502Z] ----------------------------------------------------------------------
+[debug] [2018-12-02T10:06:02.505Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\uiuiu\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2018-12-02T10:06:02.505Z] CLI Version:   6.1.1
+[debug] [2018-12-02T10:06:02.505Z] Platform:      win32
+[debug] [2018-12-02T10:06:02.505Z] Node Version:  v10.13.0
+[debug] [2018-12-02T10:06:02.508Z] Time:          Sun Dec 02 2018 19:06:02 GMT+0900 (GMT+09:00)
+[debug] [2018-12-02T10:06:02.508Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2018-12-02T08:54:22.484Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2018-12-02T08:54:22.486Z] > authorizing via signed-in user
-[debug] [2018-12-02T08:54:22.486Z] [iam] checking project friendlychat-51387 for permissions ["firebase.projects.get"]
-[debug] [2018-12-02T08:54:22.495Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/friendlychat-51387:testIamPermissions  
+[debug] [2018-12-02T10:06:02.525Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-12-02T10:06:02.525Z] > authorizing via signed-in user
+[debug] [2018-12-02T10:06:02.526Z] [iam] checking project tripmate-6c6bf for permissions ["firebase.projects.get"]
+[debug] [2018-12-02T10:06:02.528Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/tripmate-6c6bf:testIamPermissions  
 
-[debug] [2018-12-02T08:54:23.500Z] <<< HTTP RESPONSE 200
-[debug] [2018-12-02T08:54:23.505Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/friendlychat-51387  
+[debug] [2018-12-02T10:06:03.537Z] <<< HTTP RESPONSE 200
+[debug] [2018-12-02T10:06:03.540Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/tripmate-6c6bf  
  
-[debug] [2018-12-02T08:54:24.415Z] <<< HTTP RESPONSE 200
+[debug] [2018-12-02T10:06:04.364Z] <<< HTTP RESPONSE 200
 [info] 
-[info] === Serving from '/mnt/c/tripmate_real/tripmate'...
+[info] === Serving from 'C:\Users\uiuiu\tripmate'...
 [info] 
-[debug] [2018-12-02T08:54:24.433Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/815204562143/clients/_:getWebAppConfig  
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-12-02T10:06:05.719Z] Fetching environment
+[debug] [2018-12-02T10:06:05.724Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/903980273895:getServerAppConfig  
  
-[debug] [2018-12-02T08:54:25.334Z] <<< HTTP RESPONSE 200
-[info] i  hosting: Serving hosting files from: ./public
-[info] ✔  hosting: Local server: http://localhost:5000
+[debug] [2018-12-02T10:06:05.724Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/903980273895/clients/_:getWebAppConfig  
+ 
+[debug] [2018-12-02T10:06:06.243Z] <<< HTTP RESPONSE 200
+[debug] [2018-12-02T10:06:06.243Z] Starting @google-cloud/functions-emulator
+[debug] [2018-12-02T10:06:06.281Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5000
+[debug] [2018-12-02T10:06:09.404Z] Parsing function triggers
+[info] i  functions: No HTTPS functions found. Use firebase functions:shell if you would like to emulate other types of functions.

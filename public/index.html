@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-<!-- 머지테스트 -->
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,38 +36,69 @@
 
   <!-- App Styling -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/index.css">
     </head>
     <body>
-        <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <!-- <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
-                <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
-                        <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
-                            <div class="mdl-layout__header-row mdl-cell mdl-cell--10-col mdl-cell--10-col-tablet mdl-cell--10-col-desktop">
-                            <h3><i class="material-icons">chat_bubble_outline</i> Tripmate</h3>
+                <div class="mdl-layout__header">
+                        <div class="mdl-cell">
+                           <!-- mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid -->
+                            <!-- <div class="mdl-layout__header-row"> -->
+                               <!-- mdl-cell mdl-cell--10-col mdl-cell--10-col-tablet mdl-cell--10-col-desktop -->
+                            <!-- <h3><i class="material-icons">chat_bubble_outline</i> Tripmate</h3> -->
+
+
+                            <!-- <img class="logo" src="images/logo_png_1.png" alt="Tripmate" height="30px">
+                            <img class="logo" src="images/logo_png_0.png" alt="Tripmate" height="30px">
                             </div>
                             <div id="user-container">
                                 <div hidden id="user-pic"></div>
                                 <div hidden id="user-name"></div>
-                                <button hidden id="sign-out"class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                                <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--black">
                                     Sign-out
                                 </button>
-                                <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-                                    <i class="material-icons">account_circle</i>Sign-in with Google
+                                <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--black">
+                                    <i class="material-icons">account_circle</i>Sign-in
                                 </button>
                             </div>
                      </div>
-                </header>
+                </div>
                 <main>
+                    <button type="button" hidden id="go" onclick="location.href='./main.html' " class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">go chat</button> -->
 
-                    <button type="button" hidden id="go" onclick="location.href='./main.html' " class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white" style= "background-color: pink">go chat</button>
 
-        <p>login_page</p>
+
+                    <!-- <button id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--black">
+                        Sign-in
+                    </button> -->
+
+
+        <!-- <p>login_page</p>
 
 
                 </main>
 
-        </div>
+        </div> -->
+
+        <div class="logo_images">
+          <img class="logo" src="images/logo_png_1.png" alt="Tripmate" height="50px">
+          <br>
+          <img class="logo" src="images/logo_png_0.png" alt="Tripmate" height="30px">
+          </div>
+          <div id="user-container">
+              <div hidden id="user-pic"></div>
+              <div id="user-name"></div>
+              <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--black">
+                  Sign-out
+              </button>
+              <button id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--black">
+                  <img src="images/login_btn.png" alt="login button">
+              </button>
+          </div>
+
+
+ </div>  -->
 
         <script src="/__/firebase/5.5.8/firebase-app.js"></script>
         <script src="/__/firebase/5.5.8/firebase-auth.js"></script>
