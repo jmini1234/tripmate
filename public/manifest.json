@@ -1,7 +1,7 @@
 {
   "name": "Tripmate",
   "short_name": "Tripmate",
-  "start_url": "/login.html",
+  "start_url": "/index.html",
   "display": "standalone",
   "orientation": "portrait",
   "gcm_sender_id": "103953800507"
