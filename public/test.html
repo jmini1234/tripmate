@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div id = "lists">
+            <span id = "list-filler"></span>
+        </div>
+    </body>
+    <script>
+        var roomlist = ["room1", "room2", "room3"];
+
+        var List_TEMPLATE =
+            '<div class="list-container">' +
+            "<a class='name' href ='main.html'>go</a>"
+            '</div>';
+
+        var htmlelt = document.getElementById("lists");
+        for(var room in roomlist){
+            var divtag = document.createElement( 'div' );
+            divtag.innerHTML = List_TEMPLATE;
+            divtag.querySelector('.name').innerHTML = roomlist[room];
+            htmlelt.appendChild(divtag);
+        }
+    </script>
+</html>  

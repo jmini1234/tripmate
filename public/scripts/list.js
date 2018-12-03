@@ -55,61 +55,25 @@ function loadList() {  // Loads the last 12 messages and listen for new ones.
   };
   firebase.database().ref('messages/').limitToLast(12).on('value', callback);
 }
- var LIST_TEMPLATE =
-    '<div class="list-container">' +
-      '<div class="list"></div>'
-    '</div>';
+
+var List_TEMPLATE =
+  '<div class="list-container">' +
+  "<a class='name' href ='main.html'>go</a>"
+  '</div>';
     
 function displayList(roomlist) {
+
   console.log(roomlist);
-   for(var room in roomlist){
-    var list  = document.createElement("li");
-    var node = document.createTextNode(roomlist[room]);
-    list.appendChild(node);
-    // d
-    //
-    // var element = document.getElementById("ul")
-    // element.appendChild(list);
-    // // container.innerHTML = LIST_TEMPLATE;
-    //
-    //
-    // container.innerHTML = room;
+  
+  var htmlelt = document.getElementById("lists");
+  
+  for(var room in roomlist){
+    var divtag = document.createElement( 'div' );
+    divtag.innerHTML = List_TEMPLATE;
+    divtag.querySelector('.name').innerHTML = roomlist[room];
+    htmlelt.appendChild(divtag);
   }
-   //
-  // for(var i in list){
-  //
-  // }
-  //
-  // // If an element for that message does not exists yet we create it.
-  // if (!div) {
-  //   var container = document.createElement('div');
-  //   container.innerHTML = MESSAGE_TEMPLATE;
-  //   div = container.firstChild;
-  //   div.setAttribute('id', key);
-  //   div.InnerH
-  // }
-  // if (picUrl) {
-  //   div.querySelector('.pic').style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
-  // }
-  // div.querySelector('.name').textContent = name;
-  // var messageElement = div.querySelector('.message');
-  // if (text) { // If the message is text.
-  //   messageElement.textContent = text;
-  //   // Replace all line breaks by <br>.
-  //   messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
-  // } else if (imageUrl) { // If the message is an image.
-  //   var image = document.createElement('img');
-  //   image.addEventListener('load', function() {
-  //     messageListElement.scrollTop = messageListElement.scrollHeight;
-  //   });
-  //   image.src = imageUrl + '&' + new Date().getTime();
-  //   messageElement.innerHTML = '';
-  //   messageElement.appendChild(image);
-  // }
-  // // Show the card fading-in and scroll to view the new message.
-  // setTimeout(function() {div.classList.add('visible')}, 1);
-  // messageListElement.scrollTop = messageListElement.scrollHeight;
-  // messageInputElement.focus();
+    
 }
  // Shortcuts to DOM Elements.
 var messageListElement = document.getElementById('messages');

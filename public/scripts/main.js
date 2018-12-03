@@ -41,16 +41,14 @@ function isUserSignedIn() {
 function loadMessages() {
   // Loads the last 12 messages and listen for new ones.
   var callback = function(snap) {
-    console.log(snap);
     var data = snap.val();
-    console.log(data);
-    for(var key in data){
-      console.log("roomtest : "+ key);
-    }
     displayMessage(snap.key, data.name, data.text, data.profilePicUrl, data.imageUrl);
   };
 
- firebase.database().ref('messages/').limitToLast(12).on('value', callback);}
+  firebase.database().ref('/messages/room1').limitToLast(12).on('child_added', callback);
+  firebase.database().ref('/messages/room1').limitToLast(12).on('child_changed', callback);
+
+}
 
 
 // Saves a new message on the Firebase DB.
@@ -176,6 +174,7 @@ function authStateObserver(user) {
 
     // We save the Firebase Messaging Device token and enable notifications.
     saveMessagingDeviceToken();
+
   } else { // User is signed out!
     // Hide user's profile and sign-out button.
     userNameElement.setAttribute('hidden', 'true');
