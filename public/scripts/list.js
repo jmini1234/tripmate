@@ -57,23 +57,23 @@ function loadList() {  // Loads the last 12 messages and listen for new ones.
 }
 
 var List_TEMPLATE =
-  '<div class="list-container">' +
+  '<div id="list-container">' +
   "<a class='name' href ='main.html'>go</a>"
   '</div>';
-    
+
 function displayList(roomlist) {
 
   console.log(roomlist);
-  
+
   var htmlelt = document.getElementById("lists");
-  
+
   for(var room in roomlist){
     var divtag = document.createElement( 'div' );
     divtag.innerHTML = List_TEMPLATE;
     divtag.querySelector('.name').innerHTML = roomlist[room];
     htmlelt.appendChild(divtag);
   }
-    
+
 }
  // Shortcuts to DOM Elements.
 var messageListElement = document.getElementById('messages');

@@ -16,37 +16,23 @@
 
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
+  min-height: 100%;
 }
 
 body{
   background-image: url('/images/background2.jpg');
 }
 
-main, #messages-card {
-  height: 100%;
-  padding-bottom: 0;
-}
-/* #messages-card-container {
-  height: calc(100% - 35px);
-  padding-bottom: 0;
-}
-#messages-card {
-  margin-top: 15px;
-} */
 
 .logo_images{
   text-align: center;
-  margin: 200px 0px;
+  margin: 150px 0px;
 }
 
 .logo{
   padding: 10px;
 }
 
-.mdl-layout__header-row span {
-  margin-left: 15px;
-  margin-top: 17px;
-}
 /* .mdl-grid {
   max-width: 1024px;
   margin: auto;
@@ -57,19 +43,6 @@ main, #messages-card {
   position: relative;
 }
 
-.mdl-layout__header{
-  background-color: #e7eaf5;
-}
-
-.mdl-layout__header-row {
-  padding: 0;
-  margin: 0 auto;
-}
-
-.mdl-layout__content {
-  background-color: #e7eaf5;
-
-}
 /* .mdl-card__supporting-text {
   width: auto;
   height: 100%;
@@ -153,16 +126,18 @@ main, #messages-card {
   justify-content: space-between;
 }
 #user-container {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  top: 22px;
-  /* width: 100%; */
-  height: 40px;
-  right: 0;
-  padding-left: 10px;
-  justify-content: flex-end;
-  padding-right: 10px;
+  /* position: absolute;
+  /* display: flex; */
+  /* flex-direction: row;
+  top: 22px; */
+  width: 100%;
+  /* height: 40px; */
+  /* right: 0; */
+  /* justify-content: flex-end; */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 #user-container #user-pic {
   /* top: -3px; */
@@ -171,13 +146,13 @@ main, #messages-card {
   background-image: url('/images/login_btn.png');
   /* background-repeat: no-repeat; */
   /* width: 40px; */
-  height: 40px;
+  /* height: 40px; */
   /* background-size: 40px; */
   border-radius: 20px;
 }
 #user-container #user-name {
   font-size: 16px;
-  line-height: 36px;
+  /* line-height: 36px; */
   padding-right: 10px;
   padding-left: 20px;
 }
@@ -193,9 +168,9 @@ main, #messages-card {
   max-width: 300px;
   max-height: 200px;
 } */
-#mediaCapture {
+/* #mediaCapture {
   display: none;
-}
+} */
 /* @media screen and (max-width: 610px) {
   header {
     height: 113px;
@@ -224,4 +199,9 @@ main, #messages-card {
 .mdl-button .material-icons {
   top: -1px;
   margin-right: 5px;
+}
+
+.mdl-button {
+  width: auto;
+  height: 50px;
 }
