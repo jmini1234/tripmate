@@ -57,8 +57,13 @@ function loadList() {  // Loads the last 12 messages and listen for new ones.
 }
 
 var List_TEMPLATE =
-  '<div id="list-container">' +
-  "<a class='name' href ='main.html'>go</a>"
+  '<div id="list-container" class="mdl-cell mdl-cell--12-col mdl-grid">' +
+      "<li class='mdl-list__item'>"
+        "<span class='mdl-list__item-primary-content'>"
+          "<i class='material-icons mdl-list__item-icon'>chat</i>"
+          "<a class='name' href ='main.html'>go</a>"
+        '</span>'
+      '</li>'
   '</div>';
 
 function displayList(roomlist) {
