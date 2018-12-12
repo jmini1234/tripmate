@@ -31,7 +31,19 @@
 // prompted by your browser. If you see the error "The Geolocation service
 // failed.", it means you probably did not give permission for the browser to
 // locate you.
-var firebase = new Firebase('https://friendlychat-51387.firebaseio.com/');
+
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyCWAVUAWvB-E0RlK07DTDqkpd0pBI7wYb0",
+  authDomain: "friendychat-8920d.firebaseapp.com",
+  databaseURL: "https://friendychat-8920d.firebaseio.com",
+  projectId: "friendychat-8920d",
+  storageBucket: "friendychat-8920d.appspot.com",
+  messagingSenderId: "1046597658407"
+};
+
+firebase.initializeApp(config);
+
 
 // Reference to location for saving the last click time.
 
@@ -46,6 +58,50 @@ var firebase = new Firebase('https://friendlychat-51387.firebaseio.com/');
  * @param {Object} data The data to be added to firebase.
  *     It contains the lat, lng, sender and timestamp.
  */
+
+function initFirebaseAuth() {
+  // Listen to auth state changes.
+  firebase.auth().onAuthStateChanged(authStateObserver);
+  console.log(firebase.auth());
+}
+function authStateObserver(user) {
+  if (user) {
+    console.log("user is already");
+  }
+
+  getProfilePicUrl();
+  getUserName();
+  inhtml();
+              //userpic.style.backgroundImage = 'url(' + getprofilePicUrl() + ')';
+}
+
+// function addSizeToGoogleProfilePic(url) {
+//   if (url.indexOf('googleusercontent.com') !== -1 && url.indexOf('?') === -1) {
+//     return url + '?sz=150';
+//   }
+//   return url;
+// }
+
+function inhtml(){
+  var username = document.getElementById("username");
+  username.innerHTML = getUserName();
+  var userPicElement = document.getElementById('user-pic');
+
+  var picUrl = getProfilePicUrl();
+  userPicElement.setAttribute("src",picUrl);
+ // userPicElement.style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
+}
+ // Returns the signed-in user's profile Pic URL.
+ function getProfilePicUrl() {
+  return firebase.auth().currentUser.photoURL || '/images/profile_placeholder.png';
+}
+ // Returns the signed-in user's display name.
+function getUserName() {
+  return firebase.auth().currentUser.displayName;
+}
+
+initFirebaseAuth();
+
 
 var map, infowindow, pos,geocoder;
 function initMap() {
@@ -64,8 +120,6 @@ function initMap() {
         lng: position.coords.longitude
       };
 
-      var lat = document.getElementById("lat");
-      lat.innerHTML = pos.lat;
       infowindow.setPosition(pos);
       console.log(pos);
       infowindow.setContent('Location found.');
@@ -80,7 +134,10 @@ function initMap() {
     handleLocationError(false, infowindow, map.getCenter());
   }
 }
+
+
 var address ;
+
 function geocodeLatLng(geocoder, map, infowindow) {
         geocoder.geocode({'location': pos}, function(results, status) {
           if (status === 'OK') {
@@ -90,9 +147,13 @@ function geocodeLatLng(geocoder, map, infowindow) {
                 position: pos,
                 map: map
               });
+              
               infowindow.setContent(results[0].formatted_address);
               address=results[0].formatted_address;
               infowindow.open(map, marker);
+              var lat = document.getElementById("location");
+              lat.innerHTML = address;
+      
             } else {
               window.alert('No results found');
             }
@@ -126,11 +187,11 @@ var data = {
   address: null
 };
 
-
 /**
 * Starting point for running the program. Authenticates the user.
 * @param {function()} onAuthSuccess - Called when authentication succeeds.
 */
+
 function initAuthentication(onAuthSuccess) {
   firebase.authAnonymously(function(error, authData) {
     if (error) {
