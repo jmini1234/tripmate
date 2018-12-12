@@ -14,6 +14,6 @@
   * ming123 : 채팅방 list 개발(list.html, list.js 추가), icon 수정
 + 심정민 (jmini1234) : 백엔드 개발, 지도api
   * shim
-  * roomlist : room 분리
+  * roomlist : 채팅방 생성 및 분리
 + 임혜린 (imhyerin) : 지도api
   * im
