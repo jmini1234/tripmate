@@ -1,36 +1,3 @@
-/**
-* Reference to Firebase database.
-* @const
-*/
-
-/**
-* Data object to be written to Firebase.
-*/
-
-/**
- * Set up a Firebase with deletion on clicks older than expirySeconds
- * @param {!google.maps.visualization.HeatmapLayer} heatmap The heatmap to
- * which points are added from Firebase.
- */
-
-
-/**
- * Updates the last_message/ path with the current timestamp.
- * @param {function(Date)} addClick After the last message timestamp has been updated,
- *     this function is called with the current timestamp to add the
- *     click to the firebase.
- */
-
-/**
- * Adds a click to firebase.
- * @param {Object} data The data to be added to firebase.
- *     It contains the lat, lng, sender and timestamp.
- */
-
-// Note: This example requires that you consent to location sharing when
-// prompted by your browser. If you see the error "The Geolocation service
-// failed.", it means you probably did not give permission for the browser to
-// locate you.
 
 // Initialize Firebase
 var config = {
@@ -43,21 +10,6 @@ var config = {
 };
 
 firebase.initializeApp(config);
-
-
-// Reference to location for saving the last click time.
-
-/**
- * Updates the last_message/ path with the current timestamp.
- * @param {function(Date)} addClick After the last message timestamp has been updated,
- *     this function is called with the current timestamp to add the
- *     click to the firebase.
- */
-/**
- * Adds a click to firebase.
- * @param {Object} data The data to be added to firebase.
- *     It contains the lat, lng, sender and timestamp.
- */
 
 function initFirebaseAuth() {
   // Listen to auth state changes.
@@ -72,15 +24,7 @@ function authStateObserver(user) {
   getProfilePicUrl();
   getUserName();
   inhtml();
-              //userpic.style.backgroundImage = 'url(' + getprofilePicUrl() + ')';
 }
-
-// function addSizeToGoogleProfilePic(url) {
-//   if (url.indexOf('googleusercontent.com') !== -1 && url.indexOf('?') === -1) {
-//     return url + '?sz=150';
-//   }
-//   return url;
-// }
 
 function inhtml(){
   var username = document.getElementById("username");
