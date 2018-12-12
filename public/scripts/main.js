@@ -15,6 +15,7 @@
  */
 'use strict';
 
+var getRoom;
 
 // Initiate firebase auth.
 function initFirebaseAuth() {
@@ -37,16 +38,20 @@ function isUserSignedIn() {
   return !!firebase.auth().currentUser;
 }
 
+
+
+
 // Loads chat messages history and listens for upcoming ones.
-function loadMessages() {
+function loadMessages(getRoom) {
+  console.log(getRoom);
   // Loads the last 12 messages and listen for new ones.
   var callback = function(snap) {
     var data = snap.val();
     displayMessage(snap.key, data.name, data.text, data.profilePicUrl, data.imageUrl);
   };
 
-  firebase.database().ref('/messages/room1').limitToLast(12).on('child_added', callback);
-  firebase.database().ref('/messages/room1').limitToLast(12).on('child_changed', callback);
+  firebase.database().ref('/messages/'+getRoom).limitToLast(12).on('child_added', callback);
+  firebase.database().ref('/messages/'+getRoom).limitToLast(12).on('child_changed', callback);
 
 }
 
@@ -54,7 +59,7 @@ function loadMessages() {
 // Saves a new message on the Firebase DB.
 function saveMessage(messageText) {
   // Add a new message entry to the Firebase database.
-  return firebase.database().ref('/messages/room1/').push({
+  return firebase.database().ref('/messages/'+getRoom).push({
     name: getUserName(),
     text: messageText,
     profilePicUrl: getProfilePicUrl()
@@ -67,7 +72,7 @@ function saveMessage(messageText) {
 // This first saves the image in Firebase storage.
 function saveImageMessage(file) {
   // 1 - We add a message with a loading icon that will get updated with the shared image.
-  firebase.database().ref('/messages/room1/').push({
+  firebase.database().ref('/messages/'+getRoom).push({
     name: getUserName(),
     imageUrl: LOADING_IMAGE_URL,
     profilePicUrl: getProfilePicUrl()
@@ -153,6 +158,8 @@ function onMessageFormSubmit(e) {
   }
 }
 
+
+
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 function authStateObserver(user) {
   if (user) { // User is signed in!
@@ -168,12 +175,12 @@ function authStateObserver(user) {
     userNameElement.removeAttribute('hidden');
     userPicElement.removeAttribute('hidden');
 
-
     // Hide sign-in button.
 
-
     // We save the Firebase Messaging Device token and enable notifications.
+    
     saveMessagingDeviceToken();
+    setRoom();
 
   } else { // User is signed out!
     // Hide user's profile and sign-out button.
@@ -184,6 +191,16 @@ function authStateObserver(user) {
     // Show sign-in button.
 
   }
+}
+
+function setRoom(){
+  var callback= function(snap){
+    console.log(snap.val().status);
+    getRoom = snap.val().status;
+    loadMessages(getRoom);
+  }
+  firebase.database().ref('/status/'+getUserName()).on('value', callback)
+  
 }
 
 // Returns true if user is signed-in. Otherwise false and displays a message.
@@ -262,7 +279,6 @@ function displayMessage(key, name, text, picUrl, imageUrl) {
   messageInputElement.focus();
 }
 
-
 // Enables or disables the submit button depending on the values of the input
 // fields.
 function toggleButton() {
@@ -314,7 +330,6 @@ mediaCaptureElement.addEventListener('change', onMediaFileSelected);
 
 // initialize Firebase
 initFirebaseAuth();
-
 // We load currently exist
 //ing chat messages and listen to new ones.
-loadMessages();
+
