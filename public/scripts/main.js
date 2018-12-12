@@ -198,6 +198,9 @@ function setRoom(){
     console.log(snap.val().status);
     getRoom = snap.val().status;
     loadMessages(getRoom);
+    var htmlroom = document.getElementById('roomTitle');
+    htmlroom.innerHTML = getRoom;
+
   }
   firebase.database().ref('/status/'+getUserName()).on('value', callback)
   
