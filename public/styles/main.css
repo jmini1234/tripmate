@@ -64,6 +64,13 @@ main, #messages-card {
     background-image: url('/images/background2.jpg');
     text-align: center;
 }
+
+.mdl-card__title {
+  font-weight: 300;
+  height: 176px;
+  background-image: url('/images/roomname.jpg') center / cover ;
+}
+
 .mdl-card__supporting-text {
   width: auto;
   height: 100%;
