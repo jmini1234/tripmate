@@ -69,7 +69,7 @@ function loadMessages(getRoom) {
   var callback = function(snap) {
     var data = snap.val();
     console.log(data);
-    displayMessage(snap.key, data.name, data.text, data.profilePicUrl, data.imageUrl, data.location);
+    displayMessage(snap.key, data.name, data.text, data.profilePicUrl, data.imageUrl, data.location, data.time);
   };
 
   firebase.database().ref('/messages/'+getRoom).limitToLast(12).on('child_added', callback);
@@ -77,6 +77,15 @@ function loadMessages(getRoom) {
 
 }
 
+function makeTime(){
+  var d = new Date();
+  var year = d.getFullYear();
+  var month = d.getMonth()+1;
+  var date = d.getDate();
+  var time = year+"."+month+"."+date;
+
+  return time;
+}
 
 // Saves a new message on the Firebase DB.
 function saveMessage(messageText) {
@@ -85,7 +94,9 @@ function saveMessage(messageText) {
     name: getUserName(),
     text: messageText,
     profilePicUrl: getProfilePicUrl(),
-    location : address
+    location : address,
+    time: makeTime()
+
   }).catch(function(error) {
     console.error('Error writing new message to Firebase Database', error);
   });
@@ -257,6 +268,7 @@ var MESSAGE_TEMPLATE =
       '<div class="spacing"><div class="pic"></div></div>' +
       '<div class="message"></div>' +
       '<div class="location"></div>'+
+      '<div class="time"></div>' +
       '<div class="name"></div>' +
     '</div>';
 
@@ -272,7 +284,7 @@ function addSizeToGoogleProfilePic(url) {
 var LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif?a';
 
 // Displays a Message in the UI.
-function displayMessage(key, name, text, picUrl, imageUrl,location) {
+function displayMessage(key, name, text, picUrl, imageUrl,location, time) {
   var div = document.getElementById(key);
   // If an element for that message does not exists yet we create it.
   if (!div) {
@@ -307,6 +319,11 @@ function displayMessage(key, name, text, picUrl, imageUrl,location) {
     locmessage.textContent = location;
     // messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
   }
+  var timemessage = div.querySelector('.time');
+  if(time){
+    timemessage.textContent = time;
+  }
+
   // Show the card fading-in and scroll to view the new message.
   setTimeout(function() {div.classList.add('visible')}, 1);
   messageListElement.scrollTop = messageListElement.scrollHeight;
