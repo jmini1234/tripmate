@@ -47,23 +47,15 @@ function getUserName() {
 }
 
 function saveUserStatus(clickRoom){
-  var callback = function(snap) {
-    var data = snap.val();
-    displayMessage(snap.key, data.name, data.text, data.profilePicUrl, data.imageUrl);
-  };
 
-  firebase.database().ref('/status').limitToLast(12).on('child_added', callback);
-  firebase.database().ref('/status').limitToLast(12).on('child_changed', callback);
-
-  var data = firebase.database().ref('/status');
-  console.log(data);
-
-  return firebase.database().ref('/status').push({
-    name: getUserName(),
+  firebase.database().ref('/status/'+getUserName()).set({
     status: clickRoom
   }).catch(function(error) {
     console.error('Error writing new message to Firebase Database', error);
   });
+  
+
+  location.href = './main.html';  
 }
 
 
@@ -72,7 +64,6 @@ function listening(roomlist){
     var listevent = document.getElementById(roomlist[room]);
     if(listevent){
       listevent.addEventListener('click',function(e){
-        console.log(e.srcElement);
         console.log(e.srcElement.id);
         saveUserStatus(e.srcElement.id);
         
@@ -115,7 +106,7 @@ function displayList(roomlist) {
 
   for(var room in roomlist){
     var divtag = document.createElement( 'div' );
-    divtag.innerHTMinnerHTL = List_TEMPLATE_BEFORE + "id = "+roomlist[room]+List_TEMPLATE_AFTER;
+    divtag.innerHTML = List_TEMPLATE_BEFORE + "id = "+roomlist[room]+List_TEMPLATE_AFTER;
     divtag.querySelector('.name').innerHTML = roomlist[room];
     htmlelt.appendChild(divtag);
   }
