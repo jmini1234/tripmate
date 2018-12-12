@@ -57,23 +57,26 @@ function loadList() {  // Loads the last 12 messages and listen for new ones.
 }
 
 var List_TEMPLATE =
-  '<div class="list-container">' +
-  "<a class='name' href ='main.html'>go</a>"
-  '</div>';
-    
+      "<li class='mdl-list__item'>" +
+        "<span class='mdl-list__item-primary-content'>"+
+          "<i class='material-icons mdl-list__item-icon'>chat</i>"+
+          "<a class='name' href ='main.html'>go</a>"+
+        '</span>'+
+      '</li>';
+
 function displayList(roomlist) {
 
   console.log(roomlist);
-  
+  roomlist = ["Seoul", "Newyork", "Busan"];
   var htmlelt = document.getElementById("lists");
-  
+
   for(var room in roomlist){
     var divtag = document.createElement( 'div' );
     divtag.innerHTML = List_TEMPLATE;
     divtag.querySelector('.name').innerHTML = roomlist[room];
     htmlelt.appendChild(divtag);
   }
-    
+
 }
  // Shortcuts to DOM Elements.
 var messageListElement = document.getElementById('messages');

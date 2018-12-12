@@ -61,6 +61,7 @@ main, #messages-card {
 .mdl-layout__content {
   /* background-color: #e7eaf5; */
     background-image: url('/images/background2.jpg');
+    text-align: center;
 }
 .mdl-card__supporting-text {
   width: auto;
@@ -194,10 +195,10 @@ main, #messages-card {
   }
   #user-container {
     top: 72px;
-    background-color: pink;
     height: 38px;
     padding-top: 3px;
     padding-right: 2px;
+    background-color: #e7eaf5;
   }
   #user-container #user-pic {
     top: 2px;
@@ -207,10 +208,10 @@ main, #messages-card {
   }
 }
 .mdl-textfield__label:after {
-  background-color: pink;
+  background-color: #e7eaf5;
 }
 .mdl-textfield--floating-label.is-focused .mdl-textfield__label {
-  color: pink;
+  color: #e7eaf5;
 }
 .mdl-button .material-icons {
   top: -1px;
