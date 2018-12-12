@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Geolocation</title>
+      <title>Tripmate</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
@@ -19,15 +19,27 @@
     </style>
   </head>
   <body>
-      <div id="lat"></div>
-    <div id="map">
-
+    <div class= "container">
+        
+        <p>location = <span id="location"></span></p>
+        <p>username = <span id="username"></span></p>
+        <img id ="user-pic" height="100px">
+        
     </div>
+    
+    <div id="map"></div>
+
+    <script src="/__/firebase/5.5.8/firebase-app.js"></script>
+    <script src="/__/firebase/5.5.8/firebase-auth.js"></script>
+    <script src="/__/firebase/5.5.8/firebase-database.js"></script>
+    <script src="/__/firebase/5.5.8/firebase-storage.js"></script>
+    <script src="/__/firebase/5.5.8/firebase-messaging.js"></script>
+    
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
     <script src="scripts/map.js"></script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDE8bi7Ws3WnI6Etlr0uDp5ufVujOYpKg&callback=initMap">
-    </script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7H6D0NN9Qo8wB5QxaKCwfv0o2xnQkMLM&callback=initMap">
+</script>
 
   </body>
 </html>
