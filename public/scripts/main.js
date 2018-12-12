@@ -68,13 +68,11 @@ function loadMessages(getRoom) {
   // Loads the last 12 messages and listen for new ones.
   var callback = function(snap) {
     var data = snap.val();
-    console.log(data);
     displayMessage(snap.key, data.name, data.text, data.profilePicUrl, data.imageUrl, data.location, data.time);
   };
 
   firebase.database().ref('/messages/'+getRoom).limitToLast(12).on('child_added', callback);
   firebase.database().ref('/messages/'+getRoom).limitToLast(12).on('child_changed', callback);
-
 }
 
 function makeTime(){
@@ -119,7 +117,9 @@ function saveImageMessage(file) {
         // 4 - Update the chat message placeholder with the image’s URL.
         return messageRef.update({
           imageUrl: url,
-          storageUri: fileSnapshot.metadata.fullPath
+          storageUri: fileSnapshot.metadata.fullPath,
+          location : address,
+          time: makeTime()
         });
       });
     });
@@ -270,7 +270,43 @@ var MESSAGE_TEMPLATE =
       '<div class="location"></div>'+
       '<div class="time"></div>' +
       '<div class="name"></div>' +
+      '<button class="bookmark" onclick="bookmarking(this)">bookmark!</button>'
     '</div>';
+
+function bookmarking(event){
+
+  // console.log(event);
+  
+  // console.log(event.parentElement);
+
+  var parent = event.parentElement;
+  var text = parent.querySelector('.message').innerHTML;
+  var time = parent.querySelector('.time').innerHTML;
+
+  var isimg = parent.getElementsByTagName('img')[0]
+  var output
+  if(isimg){
+    output = isimg.getAttribute('src');
+    text= null;
+  }else{
+    output = null;
+  }
+  
+  console.log(isimg);
+  console.log(text);
+  firebase.database().ref('/status/'+getUserName()+"/bookmark").push({
+    text: text,
+    status: getRoom,
+    time: time,
+    image: output
+  }).catch(function(error) {
+    console.error('Error writing new message to Firebase Database', error);
+  });
+
+
+
+
+}
 
 // Adds a size to Google Profile pics URLs.
 function addSizeToGoogleProfilePic(url) {

@@ -24,6 +24,7 @@ function authStateObserver(user) {
   getProfilePicUrl();
   getUserName();
   inhtml();
+  loadBook();
 }
 
 function inhtml(){
@@ -80,7 +81,7 @@ function initMap() {
 }
 
 
-var address ;
+var address;
 
 function geocodeLatLng(geocoder, map, infowindow) {
         geocoder.geocode({'location': pos}, function(results, status) {
@@ -145,4 +146,53 @@ function initAuthentication(onAuthSuccess) {
       onAuthSuccess();
     }
   }, {remember: 'sessionOnly'});  // Users will get a new id for every session.
+}
+
+
+//bookmark
+
+function loadBook() {  // Loads the last 12 messages and listen for new ones.
+  var callback = function(snap) {
+    console.log(snap);
+    var data = snap.val();
+    for(var key in data){
+      //  console.log(data[key]);
+       displayBook(data[key]);
+    }
+    
+  };
+  firebase.database().ref('status/'+getUserName()+"/bookmark").on('value', callback);
+}
+
+var List_TEMPLATE =
+      "<li class='mdl-list__item'>" +
+      '<div class="status"></div>'+
+        '<div class="time"></div>'+
+        '<div class="message"></div>'+
+      '</li>';
+
+function displayBook(datas){
+  console.log(datas);
+  var messageListElement = document.getElementById('messages');
+  var htmlelt = document.getElementById("lists");
+  var divtag = document.createElement( 'div' );
+  divtag.innerHTML = List_TEMPLATE;
+
+  divtag.querySelector('.time').textContent = datas.time;
+  divtag.querySelector('.status').textContent = datas.status;
+  var messageElement = divtag.querySelector('.message');
+
+  if(datas.text){
+    messageElement.textContent = datas.text;
+  }
+  else if(datas.image){
+    var image = document.createElement('img');
+    image.addEventListener('load', function() {
+      messageListElement.scrollTop = messageListElement.scrollHeight;
+    });
+    image.src = datas.image + '&' + new Date().getTime();
+    messageElement.innerHTML = '';
+    messageElement.appendChild(image);
+  }
+  htmlelt.appendChild(divtag);
 }
