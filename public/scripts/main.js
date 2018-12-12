@@ -168,9 +168,7 @@ function authStateObserver(user) {
     userNameElement.removeAttribute('hidden');
     userPicElement.removeAttribute('hidden');
 
-
     // Hide sign-in button.
-
 
     // We save the Firebase Messaging Device token and enable notifications.
     saveMessagingDeviceToken();
@@ -261,7 +259,6 @@ function displayMessage(key, name, text, picUrl, imageUrl) {
   messageListElement.scrollTop = messageListElement.scrollHeight;
   messageInputElement.focus();
 }
-
 
 // Enables or disables the submit button depending on the values of the input
 // fields.

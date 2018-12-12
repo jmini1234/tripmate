@@ -1,6 +1,7 @@
 function initFirebaseAuth() {
   // Listen to auth state changes.
   firebase.auth().onAuthStateChanged(authStateObserver);
+  console.log(firebase.auth());
 }
 function authStateObserver(user) {
   if (user) {
@@ -24,6 +25,7 @@ function saveMessagingDeviceToken() {
     console.error('Unable to get messaging token.', error);
   });
 }
+
  function requestNotificationsPermissions() {
   console.log('Requesting notifications permission...');
   firebase.messaging().requestPermission().then(function() {
@@ -33,14 +35,54 @@ function saveMessagingDeviceToken() {
     console.error('Unable to get permission to notify.', error);
   });
 }
+
  // Returns the signed-in user's profile Pic URL.
 function getProfilePicUrl() {
   return firebase.auth().currentUser.photoURL || '/images/profile_placeholder.png';
 }
+
  // Returns the signed-in user's display name.
 function getUserName() {
   return firebase.auth().currentUser.displayName;
 }
+
+function saveUserStatus(clickRoom){
+  var callback = function(snap) {
+    var data = snap.val();
+    displayMessage(snap.key, data.name, data.text, data.profilePicUrl, data.imageUrl);
+  };
+
+  firebase.database().ref('/status').limitToLast(12).on('child_added', callback);
+  firebase.database().ref('/status').limitToLast(12).on('child_changed', callback);
+
+  var data = firebase.database().ref('/status');
+  console.log(data);
+
+  return firebase.database().ref('/status').push({
+    name: getUserName(),
+    status: clickRoom
+  }).catch(function(error) {
+    console.error('Error writing new message to Firebase Database', error);
+  });
+}
+
+
+function listening(roomlist){
+  for(var room in roomlist){
+    var listevent = document.getElementById(roomlist[room]);
+    if(listevent){
+      listevent.addEventListener('click',function(e){
+        console.log(e.srcElement);
+        console.log(e.srcElement.id);
+        saveUserStatus(e.srcElement.id);
+        
+      });
+    }
+  }
+}
+
+
+
  // Loads chat messages history and listens for upcoming ones.
 function loadList() {  // Loads the last 12 messages and listen for new ones.
   var callback = function(snap) {
@@ -56,28 +98,31 @@ function loadList() {  // Loads the last 12 messages and listen for new ones.
   firebase.database().ref('messages/').limitToLast(12).on('value', callback);
 }
 
-var List_TEMPLATE =
+var List_TEMPLATE_BEFORE =
       "<li class='mdl-list__item'>" +
         "<span class='mdl-list__item-primary-content'>"+
           "<i class='material-icons mdl-list__item-icon'>chat</i>"+
-          "<a class='name' href ='main.html'>go</a>"+
+          "<a class='name'  href='#'";
+var List_TEMPLATE_AFTER =
+      ">go</a>"+
         '</span>'+
       '</li>';
 
 function displayList(roomlist) {
-
   console.log(roomlist);
-  roomlist = ["Seoul", "Newyork", "Busan"];
+  // roomlist = ["Seoul", "Newyork", "Busan"];
   var htmlelt = document.getElementById("lists");
 
   for(var room in roomlist){
     var divtag = document.createElement( 'div' );
-    divtag.innerHTML = List_TEMPLATE;
+    divtag.innerHTMinnerHTL = List_TEMPLATE_BEFORE + "id = "+roomlist[room]+List_TEMPLATE_AFTER;
     divtag.querySelector('.name').innerHTML = roomlist[room];
     htmlelt.appendChild(divtag);
   }
-
+  listening(roomlist);
 }
+
+
  // Shortcuts to DOM Elements.
 var messageListElement = document.getElementById('messages');
 var messageFormElement = document.getElementById('message-form');
@@ -90,3 +135,7 @@ var userPicElement = document.getElementById('user-pic');
 var userNameElement = document.getElementById('user-name');
  initFirebaseAuth();
 loadList();
+
+setTimeout(5000);
+
+
