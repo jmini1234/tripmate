@@ -29,6 +29,7 @@ main, #messages-card {
 }
 #messages-card {
   margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .logo{

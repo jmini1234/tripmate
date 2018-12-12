@@ -7,6 +7,12 @@ body {
     background-image: url('/images/background2.jpg');
 }
 
+main, #messages-card {
+  height: 100%;
+  padding-bottom: 0;
+  text-align: center;
+}
+
 #list-container {
   height: calc(100% - 35px);
   padding-bottom: 0;
@@ -17,6 +23,11 @@ body {
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 10px;
+}
+
+#messages-card {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 a {
@@ -31,6 +42,10 @@ li {
 
 .logo{
   padding: 5px;
+}
+
+.btnimg{
+  height: 30px;
 }
 
 .mdl-layout__header-row span {
@@ -55,6 +70,12 @@ li {
 .mdl-layout__header-row {
   padding: 0;
   margin: 0 auto;
+}
+
+.mdl-layout__content {
+  /* background-color: #e7eaf5; */
+    background-image: url('/images/background2.jpg');
+    text-align: center;
 }
 
 .demo-list-item {
