@@ -54,45 +54,47 @@ function initAuthentication(onAuthSuccess) {
 /**
  * Creates a map object with a click listener and a heatmap.
  */
-function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 0, lng: 0},
-    zoom: 3,
-    styles: [{
-      featureType: 'poi',
-      stylers: [{ visibility: 'off' }]  // Turn off POI.
-    },
-    {
-      featureType: 'transit.station',
-      stylers: [{ visibility: 'off' }]  // Turn off bus, train stations etc.
-    }],
-    disableDoubleClickZoom: true,
-    streetViewControl: false,
-  });
+// function initMap() {
+//   var map = new google.maps.Map(document.getElementById('map'), {
+//     center: {lat: 0, lng: 0},
+//     zoom: 3,
+//     styles: [{
+//       featureType: 'poi',
+//       stylers: [{ visibility: 'off' }]  // Turn off POI.
+//     },
+//     {
+//       featureType: 'transit.station',
+//       stylers: [{ visibility: 'off' }]  // Turn off bus, train stations etc.
+//     }],
+//     disableDoubleClickZoom: true,
+//     streetViewControl: false,
+//   });
+//
+//   // Create the DIV to hold the control and call the makeInfoBox() constructor
+//   // passing in this DIV.
+//   var infoBoxDiv = document.createElement('div');
+//   makeInfoBox(infoBoxDiv, map);
+//   map.controls[google.maps.ControlPosition.TOP_CENTER].push(infoBoxDiv);
+//
+//   // Listen for clicks and add the location of the click to firebase.
+//
+//   map.addListener('click', function(e) {
+//     data.lat = e.latLng.lat();
+//     data.lng = e.latLng.lng();
+//     addToFirebase(data);
+//   });
+//
+//   // Create a heatmap.
+//   var heatmap = new google.maps.visualization.HeatmapLayer({
+//     data: [],
+//     map: map,
+//     radius: 16
+//   });
+//
+//   initAuthentication(initFirebase.bind(undefined, heatmap));
+// }
 
-  // Create the DIV to hold the control and call the makeInfoBox() constructor
-  // passing in this DIV.
-  var infoBoxDiv = document.createElement('div');
-  makeInfoBox(infoBoxDiv, map);
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(infoBoxDiv);
 
-  // Listen for clicks and add the location of the click to firebase.
-
-  map.addListener('click', function(e) {
-    data.lat = e.latLng.lat();
-    data.lng = e.latLng.lng();
-    addToFirebase(data);
-  });
-
-  // Create a heatmap.
-  var heatmap = new google.maps.visualization.HeatmapLayer({
-    data: [],
-    map: map,
-    radius: 16
-  });
-
-  initAuthentication(initFirebase.bind(undefined, heatmap));
-}
 
 /**
  * Set up a Firebase with deletion on clicks older than expirySeconds
@@ -245,42 +247,68 @@ function addToFirebase(data) {
   });
 }
 
-var map, infoWindow;
+var map, infowindow, pos,geocoder;
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: -34.397, lng: 150.644},
     zoom: 6
   });
-  infoWindow = new google.maps.InfoWindow;
+  infowindow = new google.maps.InfoWindow;
+  geocoder = new google.maps.Geocoder;
 
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = {
+      pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
 
       var lat = document.getElementById("lat");
       lat.innerHTML = pos.lat;
-      infoWindow.setPosition(pos);
+      infowindow.setPosition(pos);
       console.log(pos);
-      infoWindow.setContent('Location found.');
-      infoWindow.open(map);
+      infowindow.setContent('Location found.');
+      infowindow.open(map);
       map.setCenter(pos);
+      geocodeLatLng(geocoder, map, infowindow);
     }, function() {
-      handleLocationError(true, infoWindow, map.getCenter());
+      handleLocationError(true, infowindow, map.getCenter());
     });
   } else {
     // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
+    handleLocationError(false, infowindow, map.getCenter());
   }
 }
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(browserHasGeolocation ?
+function geocodeLatLng(geocoder, map, infowindow) {
+        geocoder.geocode({'location': pos}, function(results, status) {
+          if (status === 'OK') {
+            if (results[0]) {
+              map.setZoom(11);
+              var marker = new google.maps.Marker({
+                position: pos,
+                map: map
+              });
+              infowindow.setContent(results[0].formatted_address);
+              infowindow.open(map, marker);
+              console.log("his");
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+      }
+
+
+
+
+function handleLocationError(browserHasGeolocation, infowindow, pos) {
+  infowindow.setPosition(pos);
+  infowindow.setContent(browserHasGeolocation ?
                         'Error: The Geolocation service failed.' :
                         'Error: Your browser doesn\'t support geolocation.');
-  infoWindow.open(map);
+  infowindow.open(map);
 }
