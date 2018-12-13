@@ -25,6 +25,14 @@ function authStateObserver(user) {
   getUserName();
   inhtml();
   loadBook();
+
+  // Set the user's profile pic and name.
+  userPicElement.style.backgroundImage = 'url(' + profilePicUrl + ')';
+  userNameElement.textContent = userName;
+
+  // Show user's profile and sign-out button.
+  userNameElement.removeAttribute('hidden');
+  userPicElement.removeAttribute('hidden');
 }
 
 function inhtml(){
@@ -92,13 +100,13 @@ function geocodeLatLng(geocoder, map, infowindow) {
                 position: pos,
                 map: map
               });
-              
+
               infowindow.setContent(results[0].formatted_address);
               address=results[0].formatted_address;
               infowindow.open(map, marker);
               var lat = document.getElementById("location");
               lat.innerHTML = address;
-      
+
             } else {
               window.alert('No results found');
             }
@@ -159,7 +167,7 @@ function loadBook() {  // Loads the last 12 messages and listen for new ones.
       //  console.log(data[key]);
        displayBook(data[key]);
     }
-    
+
   };
   firebase.database().ref('status/'+getUserName()+"/bookmark").on('value', callback);
 }

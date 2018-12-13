@@ -55,8 +55,8 @@ function initMap(){
       } else {
         window.alert('Geocoder failed due to: ' + status);
       }
-      
-      
+
+
     });
     });
   }
@@ -212,7 +212,7 @@ function authStateObserver(user) {
     // Hide sign-in button.
 
     // We save the Firebase Messaging Device token and enable notifications.
-    
+
     saveMessagingDeviceToken();
     setRoom();
 
@@ -237,7 +237,7 @@ function setRoom(){
 
   }
   firebase.database().ref('/status/'+getUserName()).on('value', callback)
-  
+
 }
 
 // Returns true if user is signed-in. Otherwise false and displays a message.
@@ -270,13 +270,15 @@ var MESSAGE_TEMPLATE =
       '<div class="location"></div>'+
       '<div class="time"></div>' +
       '<div class="name"></div>' +
-      '<button class="bookmark" onclick="bookmarking(this)">bookmark!</button>'
+      '<div class="bookmark" onclick="bookmarking(this)">'+
+      "<i class='material-icons'>bookmark_border</i>"+
+      '</div>'+
     '</div>';
 
 function bookmarking(event){
 
   // console.log(event);
-  
+
   // console.log(event.parentElement);
 
   var parent = event.parentElement;
@@ -291,7 +293,7 @@ function bookmarking(event){
   }else{
     output = null;
   }
-  
+
   console.log(isimg);
   console.log(text);
   firebase.database().ref('/status/'+getUserName()+"/bookmark").push({
@@ -419,4 +421,3 @@ mediaCaptureElement.addEventListener('change', onMediaFileSelected);
 initFirebaseAuth();
 // We load currently exist
 //ing chat messages and listen to new ones.
-
