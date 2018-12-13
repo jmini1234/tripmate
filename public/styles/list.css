@@ -7,7 +7,7 @@ body {
     background-image: url('/images/background2.jpg');
 }
 
-main, #messages-card {
+main, #list-card {
   height: 100%;
   padding-bottom: 0;
   text-align: center;
@@ -25,7 +25,7 @@ main, #messages-card {
   padding-top: 10px;
 }
 
-#messages-card {
+#list-card {
   margin-top: 15px;
   margin-bottom: 15px;
 }
@@ -90,18 +90,48 @@ li {
   border-bottom-color: #e7eaf5;
 }
 
+#listlist {
+  overflow-y: auto;
+  margin-bottom: 10px;
+  height: calc(100% - 80px);
+  display: flex;
+  flex-direction: column;
+}
+#list-filler {
+  flex-grow: 1;
+}
+
+#user-container {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  top: 22px;
+  width: 100%;
+  right: 0;
+  padding-left: 10px;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+#user-container #user-pic {
+  top: -3px;
+  position: relative;
+  display: inline-block;
+  background-image: url('/images/profile_placeholder.png');
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  background-size: 40px;
+  border-radius: 20px;
+}
+#user-container #user-name {
+  font-size: 16px;
+  line-height: 36px;
+  padding-right: 10px;
+  padding-left: 20px;
+}
+
 @media screen and (max-width: 610px) {
-  header {
-    height: 113px;
-    padding-bottom: 80px !important;
-  }
-  #user-container {
-    top: 72px;
-    height: 38px;
-    padding-top: 3px;
-    padding-right: 2px;
-    background-color: #e7eaf5;
-  }
+
   #user-container #user-pic {
     top: 2px;
     width: 33px;
