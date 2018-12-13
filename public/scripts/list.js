@@ -45,6 +45,38 @@ function getProfilePicUrl() {
 function getUserName() {
   return firebase.auth().currentUser.displayName;
 }
+//header에 user-pic, username 보이기
+function authStateObserver(user) {
+  if (user) { // User is signed in!
+    // Get the signed-in user's profile pic and name.
+    var profilePicUrl = getProfilePicUrl();
+    var userName = getUserName();
+
+    // Set the user's profile pic and name.
+    userPicElement.style.backgroundImage = 'url(' + profilePicUrl + ')';
+    userNameElement.textContent = userName;
+
+    // Show user's profile and sign-out button.
+    userNameElement.removeAttribute('hidden');
+    userPicElement.removeAttribute('hidden');
+
+    // Hide sign-in button.
+
+    // We save the Firebase Messaging Device token and enable notifications.
+
+    saveMessagingDeviceToken();
+    setRoom();
+
+  } else { // User is signed out!
+    // Hide user's profile and sign-out button.
+    userNameElement.setAttribute('hidden', 'true');
+    userPicElement.setAttribute('hidden', 'true');
+
+
+    // Show sign-in button.
+
+  }
+}
 
 function saveUserStatus(clickRoom){
 
@@ -53,9 +85,9 @@ function saveUserStatus(clickRoom){
   }).catch(function(error) {
     console.error('Error writing new message to Firebase Database', error);
   });
-  
 
-  location.href = './main.html';  
+
+  location.href = './main.html';
 }
 
 
@@ -66,7 +98,7 @@ function listening(roomlist){
       listevent.addEventListener('click',function(e){
         console.log(e.srcElement.id);
         saveUserStatus(e.srcElement.id);
-        
+
       });
     }
   }
@@ -128,5 +160,3 @@ var userNameElement = document.getElementById('user-name');
 loadList();
 
 setTimeout(5000);
-
-

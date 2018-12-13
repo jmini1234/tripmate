@@ -1,29 +1,49 @@
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+#map {
+  height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+/* html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+} */
+
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
   min-height: 100%;
 }
 
-main, #list-card {
+body {
+    background-image: url('/images/background2.jpg');
+}
+
+main {
   height: 100%;
   padding-bottom: 0;
   text-align: center;
 }
 
-#list-container {
+#mypage-container {
   height: calc(100% - 35px);
   padding-bottom: 0;
   text-align: center;
-}
-
-#list-card {
-  margin-top: 15px;
-  margin-bottom: 15px;
 }
 
 #lists {
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 10px;
+}
+
+#info-card, #map-card, #bookmark-card {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#info-card {
+  height: 200px;
 }
 
 a {
@@ -40,10 +60,6 @@ li {
   padding: 5px;
 }
 
-.btnimg{
-  height: 30px;
-}
-
 .mdl-layout__header-row span {
   margin-left: 15px;
   margin-top: 17px;
@@ -53,8 +69,9 @@ li {
   margin: auto;
 }
 .material-icons {
-  font-size: 36px;
+  font-size: 24px;
   top: 8px;
+  margin-right:3px;
   position: relative;
 }
 
@@ -74,6 +91,20 @@ li {
     text-align: center;
 }
 
+.mdl-card__title {
+  font-weight: 300;
+  height: 100px;
+  background-image: url('/images/infoimg0.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.mdl-card__supporting-text {
+  width: auto;
+  height: 100%;
+  text-align: left;
+}
+
 .demo-list-item {
   margin: 0;
   padding-top: 0;
@@ -84,6 +115,17 @@ li {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #e7eaf5;
+}
+
+/* #listlist {
+  overflow-y: auto;
+  margin-bottom: 10px;
+  height: calc(100% - 80px);
+  display: flex;
+  flex-direction: column;
+} */
+#list-filler {
+  flex-grow: 1;
 }
 
 #user-container {
