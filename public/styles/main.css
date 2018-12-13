@@ -43,7 +43,7 @@ main, #messages-card {
   margin: auto;
 }
 .material-icons {
-  font-size: 36px;
+  font-size: 30px;
   top: 8px;
   position: relative;
 }
@@ -127,16 +127,26 @@ main, #messages-card {
   padding: 5px 0 5px 10px;
 }
 .message-container .name {
-  display: inline-block;
-  width: 100%;
-  padding-left: 40px;
+  float: right;
   color: #bbb;
   font-style: italic;
   font-size: 12px;
   box-sizing: border-box;
+  padding-right:10px;
+  padding-left: 40px;
 }
 
 .message-container .time {
+  float: right;
+  color: #bbb;
+  font-style: italic;
+  font-size: 12px;
+  box-sizing: border-box;
+  text-align:right;
+  padding-right: 10px;
+}
+
+.message-container .location {
   display: inline-block;
   width: 100%;
   padding-left: 40px;
@@ -144,7 +154,7 @@ main, #messages-card {
   font-style: italic;
   font-size: 12px;
   box-sizing: border-box;
-  text-align:left;
+  text-align: right;
   padding-right:10px;
 }
 
