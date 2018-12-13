@@ -37,13 +37,20 @@ main {
   padding-top: 10px;
 }
 
-#info-card, #map-card, #bookmark-card {
+#info-card {
+  height: 200px;
   margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+#map-card {
+  margin-top:0px;
   margin-bottom: 10px;
 }
 
-#info-card {
-  height: 200px;
+#bookmark-card {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 a {
@@ -115,6 +122,30 @@ li {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #e7eaf5;
+}
+
+.mdl-list__item .status {
+  font-size: 12px;
+  box-sizing:border-box;
+  background-color:#e7eaf5;
+  padding:4px;
+  margin-right:4px;
+}
+
+.mdl-list__item .time {
+  font-size: 12px;
+  font-style:italic;
+  box-sizing:border-box;
+  padding:4px;
+  margin-right:4px;
+  color: #bbb;
+}
+
+.mdl-list__item .message {
+  font-size: 14px;
+  box-sizing:border-box;
+  padding:4px;
+  margin-right:4px;
 }
 
 /* #listlist {
