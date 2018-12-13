@@ -50,8 +50,8 @@
         <img class="logo" src="images/logo_png_0.png" alt="Tripmate" height="30px">
       </div>
       <div id="user-container">
-        <div hidden id="user-pic"></div>
-        <div hidden id="user-name"></div>
+        <div hidden id="user-pic" onclick="location.href='./map.html'"></div>
+        <div hidden id="user-name" onclick="location.href='./map.html'"></div>
       </div>
     </div>
   </header>
@@ -64,9 +64,9 @@
 
     <div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
       <!-- Messages container -->
-      <div id="messages-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--6-col-desktop">
+      <div id="messages-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-phone">
         <div class="mdl-card__title">
-          <h1 id = roomTitle class="mdl_card__title-text mdl-color-text--white"></h1>
+          <h4 id = roomTitle class="mdl_card__title-text mdl-color-text--white" align="center"></h4>
         </div>
         <div class="mdl-card__supporting-text mdl-color-text--grey-600">
           <div id="messages">

@@ -20,7 +20,6 @@ html, body {
 main, #messages-card {
   height: 100%;
   padding-bottom: 0;
-  text-align: center;
 }
 #messages-card-container {
   height: calc(100% - 35px);
@@ -66,13 +65,18 @@ main, #messages-card {
 }
 
 .mdl-card__title {
-  font-weight: 300;
-  height: 176px;
+  font-weight: 200;
+  height: 70px;
   background-image: url('/images/roomname0.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   text-align: center;
+}
+
+#roomTitle {
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .mdl-card__supporting-text {
@@ -131,6 +135,23 @@ main, #messages-card {
   font-size: 12px;
   box-sizing: border-box;
 }
+
+.message-container .time {
+  display: inline-block;
+  width: 100%;
+  padding-left: 40px;
+  color: #bbb;
+  font-style: italic;
+  font-size: 12px;
+  box-sizing: border-box;
+  text-align:left;
+  padding-right:10px;
+}
+
+.message-container .bookmark{
+  text-align:right;
+}
+
 #message-form {
   display: flex;
   flex-direction: row;

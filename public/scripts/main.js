@@ -271,7 +271,7 @@ var MESSAGE_TEMPLATE =
       '<div class="time"></div>' +
       '<div class="name"></div>' +
       '<div class="bookmark" onclick="bookmarking(this)">'+
-      "<i class='material-icons'>bookmark_border</i>"+
+      "<i class='material-icons'>bookmark</i>"+
       '</div>'+
     '</div>';
 
