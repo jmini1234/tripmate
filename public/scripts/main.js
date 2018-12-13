@@ -236,7 +236,7 @@ function setRoom(){
     htmlroom.innerHTML = getRoom;
 
   }
-  firebase.database().ref('/status/'+getUserName()).on('value', callback)
+  firebase.database().ref('/status/'+getUserName()+'/location').on('value', callback)
 
 }
 
