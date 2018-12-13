@@ -1,51 +1,52 @@
-/**
-* Reference to Firebase database.
-* @const
-*/
 
-/**
-* Data object to be written to Firebase.
-*/
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyCWAVUAWvB-E0RlK07DTDqkpd0pBI7wYb0",
+  authDomain: "friendychat-8920d.firebaseapp.com",
+  databaseURL: "https://friendychat-8920d.firebaseio.com",
+  projectId: "friendychat-8920d",
+  storageBucket: "friendychat-8920d.appspot.com",
+  messagingSenderId: "1046597658407"
+};
 
-/**
- * Set up a Firebase with deletion on clicks older than expirySeconds
- * @param {!google.maps.visualization.HeatmapLayer} heatmap The heatmap to
- * which points are added from Firebase.
- */
+firebase.initializeApp(config);
 
+function initFirebaseAuth() {
+  // Listen to auth state changes.
+  firebase.auth().onAuthStateChanged(authStateObserver);
+  console.log(firebase.auth());
+}
+function authStateObserver(user) {
+  if (user) {
+    console.log("user is already");
+  }
 
-/**
- * Updates the last_message/ path with the current timestamp.
- * @param {function(Date)} addClick After the last message timestamp has been updated,
- *     this function is called with the current timestamp to add the
- *     click to the firebase.
- */
+  getProfilePicUrl();
+  getUserName();
+  inhtml();
+  loadBook();
+}
 
-/**
- * Adds a click to firebase.
- * @param {Object} data The data to be added to firebase.
- *     It contains the lat, lng, sender and timestamp.
- */
+function inhtml(){
+  var username = document.getElementById("username");
+  username.innerHTML = getUserName();
+  var userPicElement = document.getElementById('user-pic');
 
-// Note: This example requires that you consent to location sharing when
-// prompted by your browser. If you see the error "The Geolocation service
-// failed.", it means you probably did not give permission for the browser to
-// locate you.
-var firebase = new Firebase('https://friendlychat-51387.firebaseio.com/');
+  var picUrl = getProfilePicUrl();
+  userPicElement.setAttribute("src",picUrl);
+ // userPicElement.style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
+}
+ // Returns the signed-in user's profile Pic URL.
+ function getProfilePicUrl() {
+  return firebase.auth().currentUser.photoURL || '/images/profile_placeholder.png';
+}
+ // Returns the signed-in user's display name.
+function getUserName() {
+  return firebase.auth().currentUser.displayName;
+}
 
-// Reference to location for saving the last click time.
+initFirebaseAuth();
 
-/**
- * Updates the last_message/ path with the current timestamp.
- * @param {function(Date)} addClick After the last message timestamp has been updated,
- *     this function is called with the current timestamp to add the
- *     click to the firebase.
- */
-/**
- * Adds a click to firebase.
- * @param {Object} data The data to be added to firebase.
- *     It contains the lat, lng, sender and timestamp.
- */
 
 var map, infowindow, pos,geocoder;
 function initMap() {
@@ -64,8 +65,6 @@ function initMap() {
         lng: position.coords.longitude
       };
 
-      var lat = document.getElementById("lat");
-      lat.innerHTML = pos.lat;
       infowindow.setPosition(pos);
       console.log(pos);
       infowindow.setContent('Location found.');
@@ -80,7 +79,10 @@ function initMap() {
     handleLocationError(false, infowindow, map.getCenter());
   }
 }
-var address ;
+
+
+var address;
+
 function geocodeLatLng(geocoder, map, infowindow) {
         geocoder.geocode({'location': pos}, function(results, status) {
           if (status === 'OK') {
@@ -90,9 +92,13 @@ function geocodeLatLng(geocoder, map, infowindow) {
                 position: pos,
                 map: map
               });
+              
               infowindow.setContent(results[0].formatted_address);
               address=results[0].formatted_address;
               infowindow.open(map, marker);
+              var lat = document.getElementById("location");
+              lat.innerHTML = address;
+      
             } else {
               window.alert('No results found');
             }
@@ -126,11 +132,11 @@ var data = {
   address: null
 };
 
-
 /**
 * Starting point for running the program. Authenticates the user.
 * @param {function()} onAuthSuccess - Called when authentication succeeds.
 */
+
 function initAuthentication(onAuthSuccess) {
   firebase.authAnonymously(function(error, authData) {
     if (error) {
@@ -140,4 +146,53 @@ function initAuthentication(onAuthSuccess) {
       onAuthSuccess();
     }
   }, {remember: 'sessionOnly'});  // Users will get a new id for every session.
+}
+
+
+//bookmark
+
+function loadBook() {  // Loads the last 12 messages and listen for new ones.
+  var callback = function(snap) {
+    console.log(snap);
+    var data = snap.val();
+    for(var key in data){
+      //  console.log(data[key]);
+       displayBook(data[key]);
+    }
+    
+  };
+  firebase.database().ref('status/'+getUserName()+"/bookmark").on('value', callback);
+}
+
+var List_TEMPLATE =
+      "<li class='mdl-list__item'>" +
+      '<div class="status"></div>'+
+        '<div class="time"></div>'+
+        '<div class="message"></div>'+
+      '</li>';
+
+function displayBook(datas){
+  console.log(datas);
+  var messageListElement = document.getElementById('messages');
+  var htmlelt = document.getElementById("lists");
+  var divtag = document.createElement( 'div' );
+  divtag.innerHTML = List_TEMPLATE;
+
+  divtag.querySelector('.time').textContent = datas.time;
+  divtag.querySelector('.status').textContent = datas.status;
+  var messageElement = divtag.querySelector('.message');
+
+  if(datas.text){
+    messageElement.textContent = datas.text;
+  }
+  else if(datas.image){
+    var image = document.createElement('img');
+    image.addEventListener('load', function() {
+      messageListElement.scrollTop = messageListElement.scrollHeight;
+    });
+    image.src = datas.image + '&' + new Date().getTime();
+    messageElement.innerHTML = '';
+    messageElement.appendChild(image);
+  }
+  htmlelt.appendChild(divtag);
 }

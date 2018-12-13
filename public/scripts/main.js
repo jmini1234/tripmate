@@ -1,19 +1,7 @@
-/**
- * Copyright 2015 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 'use strict';
+
+
 
 var getRoom;
 
@@ -21,6 +9,7 @@ var getRoom;
 function initFirebaseAuth() {
   // Listen to auth state changes.
   firebase.auth().onAuthStateChanged(authStateObserver);
+  initMap();
 }
 
 // Returns the signed-in user's profile Pic URL.
@@ -39,7 +28,39 @@ function isUserSignedIn() {
 }
 
 
+var address;
+function initMap(){
 
+  //위도 경도 받아오기
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+    console.log(pos);
+
+
+    var geocoder = new google.maps.Geocoder;
+    geocoder.geocode({'location': pos}, function(results, status) {
+      console.log(results);
+      if (status === 'OK') {
+        if (results[2]) {
+          address=results[2].formatted_address;
+        }else if (results[0]){
+          address=results[0].formatted_address;
+        } else {
+          window.alert('No results found');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+      
+      
+    });
+    });
+  }
+}
 
 // Loads chat messages history and listens for upcoming ones.
 function loadMessages(getRoom) {
@@ -47,14 +68,22 @@ function loadMessages(getRoom) {
   // Loads the last 12 messages and listen for new ones.
   var callback = function(snap) {
     var data = snap.val();
-    displayMessage(snap.key, data.name, data.text, data.profilePicUrl, data.imageUrl);
+    displayMessage(snap.key, data.name, data.text, data.profilePicUrl, data.imageUrl, data.location, data.time);
   };
 
   firebase.database().ref('/messages/'+getRoom).limitToLast(12).on('child_added', callback);
   firebase.database().ref('/messages/'+getRoom).limitToLast(12).on('child_changed', callback);
-
 }
 
+function makeTime(){
+  var d = new Date();
+  var year = d.getFullYear();
+  var month = d.getMonth()+1;
+  var date = d.getDate();
+  var time = year+"."+month+"."+date;
+
+  return time;
+}
 
 // Saves a new message on the Firebase DB.
 function saveMessage(messageText) {
@@ -62,7 +91,10 @@ function saveMessage(messageText) {
   return firebase.database().ref('/messages/'+getRoom).push({
     name: getUserName(),
     text: messageText,
-    profilePicUrl: getProfilePicUrl()
+    profilePicUrl: getProfilePicUrl(),
+    location : address,
+    time: makeTime()
+
   }).catch(function(error) {
     console.error('Error writing new message to Firebase Database', error);
   });
@@ -85,7 +117,9 @@ function saveImageMessage(file) {
         // 4 - Update the chat message placeholder with the image’s URL.
         return messageRef.update({
           imageUrl: url,
-          storageUri: fileSnapshot.metadata.fullPath
+          storageUri: fileSnapshot.metadata.fullPath,
+          location : address,
+          time: makeTime()
         });
       });
     });
@@ -233,8 +267,46 @@ var MESSAGE_TEMPLATE =
     '<div class="message-container">' +
       '<div class="spacing"><div class="pic"></div></div>' +
       '<div class="message"></div>' +
+      '<div class="location"></div>'+
+      '<div class="time"></div>' +
       '<div class="name"></div>' +
+      '<button class="bookmark" onclick="bookmarking(this)">bookmark!</button>'
     '</div>';
+
+function bookmarking(event){
+
+  // console.log(event);
+  
+  // console.log(event.parentElement);
+
+  var parent = event.parentElement;
+  var text = parent.querySelector('.message').innerHTML;
+  var time = parent.querySelector('.time').innerHTML;
+
+  var isimg = parent.getElementsByTagName('img')[0]
+  var output
+  if(isimg){
+    output = isimg.getAttribute('src');
+    text= null;
+  }else{
+    output = null;
+  }
+  
+  console.log(isimg);
+  console.log(text);
+  firebase.database().ref('/status/'+getUserName()+"/bookmark").push({
+    text: text,
+    status: getRoom,
+    time: time,
+    image: output
+  }).catch(function(error) {
+    console.error('Error writing new message to Firebase Database', error);
+  });
+
+
+
+
+}
 
 // Adds a size to Google Profile pics URLs.
 function addSizeToGoogleProfilePic(url) {
@@ -248,7 +320,7 @@ function addSizeToGoogleProfilePic(url) {
 var LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif?a';
 
 // Displays a Message in the UI.
-function displayMessage(key, name, text, picUrl, imageUrl) {
+function displayMessage(key, name, text, picUrl, imageUrl,location, time) {
   var div = document.getElementById(key);
   // If an element for that message does not exists yet we create it.
   if (!div) {
@@ -258,11 +330,13 @@ function displayMessage(key, name, text, picUrl, imageUrl) {
     div.setAttribute('id', key);
     messageListElement.appendChild(div);
   }
+
   if (picUrl) {
     div.querySelector('.pic').style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
   }
   div.querySelector('.name').textContent = name;
   var messageElement = div.querySelector('.message');
+
   if (text) { // If the message is text.
     messageElement.textContent = text;
     // Replace all line breaks by <br>.
@@ -276,6 +350,16 @@ function displayMessage(key, name, text, picUrl, imageUrl) {
     messageElement.innerHTML = '';
     messageElement.appendChild(image);
   }
+  var locmessage = div.querySelector('.location');
+  if(location){
+    locmessage.textContent = location;
+    // messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
+  }
+  var timemessage = div.querySelector('.time');
+  if(time){
+    timemessage.textContent = time;
+  }
+
   // Show the card fading-in and scroll to view the new message.
   setTimeout(function() {div.classList.add('visible')}, 1);
   messageListElement.scrollTop = messageListElement.scrollHeight;

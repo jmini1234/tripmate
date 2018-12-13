@@ -68,7 +68,10 @@ main, #messages-card {
 .mdl-card__title {
   font-weight: 300;
   height: 176px;
-  background-image: url('/images/roomname.jpg') center / cover ;
+  background-image: url('/images/roomname0.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .mdl-card__supporting-text {
@@ -197,7 +200,7 @@ main, #messages-card {
   display: none;
 }
 @media screen and (max-width: 610px) {
-  header {
+  /* header {
     height: 113px;
     padding-bottom: 80px !important;
   }
@@ -207,7 +210,7 @@ main, #messages-card {
     padding-top: 3px;
     padding-right: 2px;
     background-color: #e7eaf5;
-  }
+  } */
   #user-container #user-pic {
     top: 2px;
     width: 33px;
