@@ -1,7 +1,6 @@
 {
   "projects": {
-    "staging": "friendlychat-51387",
-    "hosting": "tripmate-6c6bf",
-    "default": "tripmate-6c6bf"
+    "default": "friendychat-8920d",
+    "hosting": "tripmate-6c6bf"
   }
 }
