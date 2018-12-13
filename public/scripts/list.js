@@ -65,7 +65,6 @@ function authStateObserver(user) {
     // We save the Firebase Messaging Device token and enable notifications.
 
     saveMessagingDeviceToken();
-    setRoom();
 
   } else { // User is signed out!
     // Hide user's profile and sign-out button.
@@ -80,7 +79,7 @@ function authStateObserver(user) {
 
 function saveUserStatus(clickRoom){
 
-  firebase.database().ref('/status/'+getUserName()).set({
+  firebase.database().ref('/status/'+getUserName()+'/location').set({
     status: clickRoom
   }).catch(function(error) {
     console.error('Error writing new message to Firebase Database', error);
