@@ -3,10 +3,6 @@ html, body {
   min-height: 100%;
 }
 
-body {
-    background-image: url('/images/background2.jpg');
-}
-
 main, #list-card {
   height: 100%;
   padding-bottom: 0;
@@ -19,15 +15,15 @@ main, #list-card {
   text-align: center;
 }
 
+#list-card {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 #lists {
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 10px;
-}
-
-#list-card {
-  margin-top: 15px;
-  margin-bottom: 15px;
 }
 
 a {
@@ -88,17 +84,6 @@ li {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #e7eaf5;
-}
-
-#listlist {
-  overflow-y: auto;
-  margin-bottom: 10px;
-  height: calc(100% - 80px);
-  display: flex;
-  flex-direction: column;
-}
-#list-filler {
-  flex-grow: 1;
 }
 
 #user-container {
