@@ -25,14 +25,6 @@ function authStateObserver(user) {
   getUserName();
   inhtml();
   loadBook();
-
-  // Set the user's profile pic and name.
-  userPicElement.style.backgroundImage = 'url(' + profilePicUrl + ')';
-  userNameElement.textContent = userName;
-
-  // Show user's profile and sign-out button.
-  userNameElement.removeAttribute('hidden');
-  userPicElement.removeAttribute('hidden');
 }
 
 function inhtml(){

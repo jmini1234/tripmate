@@ -267,9 +267,9 @@ var MESSAGE_TEMPLATE =
     '<div class="message-container">' +
       '<div class="spacing"><div class="pic"></div></div>' +
       '<div class="message"></div>' +
-      '<div class="location"></div>'+
-      '<div class="time"></div>' +
+      '<div class="time"></div>'+
       '<div class="name"></div>' +
+      '<div class="location"></div>' +
       '<div class="bookmark" onclick="bookmarking(this)">'+
       "<i class='material-icons'>bookmark</i>"+
       '</div>'+
