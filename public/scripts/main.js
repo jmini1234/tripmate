@@ -296,18 +296,23 @@ function bookmarking(event){
 
   console.log(isimg);
   console.log(text);
+
   firebase.database().ref('/status/'+getUserName()+"/bookmark").push({
     text: text,
     status: getRoom,
     time: time,
     image: output
-  }).catch(function(error) {
+  }, getToggle()).catch(function(error) {
     console.error('Error writing new message to Firebase Database', error);
   });
+}
 
-
-
-
+function getToggle(){
+  var data = {
+    message: 'This context saved in bookmark',
+    timeout: 2000
+  };
+  BookmarkSnackbarElement.MaterialSnackbar.showSnackbar(data);
 }
 
 // Adds a size to Google Profile pics URLs.
@@ -402,6 +407,8 @@ var userPicElement = document.getElementById('user-pic');
 var userNameElement = document.getElementById('user-name');
 
 var signInSnackbarElement = document.getElementById('must-signin-snackbar');
+
+var BookmarkSnackbarElement = document.getElementById('save-bookmark');
 
 // Saves message on form submit.
 messageFormElement.addEventListener('submit', onMessageFormSubmit);
