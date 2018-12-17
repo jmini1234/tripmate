@@ -118,6 +118,7 @@ li {
 }
 
 .mdl-list__item {
+  display:block;
   padding: 10px;
   border-bottom-style: solid;
   border-bottom-width: 1px;
@@ -125,6 +126,7 @@ li {
 }
 
 .mdl-list__item .status {
+  float:left;
   font-size: 12px;
   box-sizing:border-box;
   background-color:#e7eaf5;
@@ -133,6 +135,7 @@ li {
 }
 
 .mdl-list__item .time {
+  float:left;
   font-size: 12px;
   font-style:italic;
   box-sizing:border-box;
@@ -142,10 +145,18 @@ li {
 }
 
 .mdl-list__item .message {
+  display:inline-block;
+  float:left;
   font-size: 14px;
   box-sizing:border-box;
   padding:4px;
   margin-right:4px;
+  text-align: left;
+  width:100%;
+}
+
+.message img {
+  width: 100%;
 }
 
 /* #listlist {
