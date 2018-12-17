@@ -1,7 +1,8 @@
 # tripmate
 주요 도시를 여행하는 여행객들과의 실시간 정보를 공유하는 채팅 앱
 
-[웹 앱 연결하기](https://triptmate.firebaseapp.com/main.html)
+[트립메이트 채팅 웹](https://triptmate.firebaseapp.com/main.html)
+https://triptmate.firebaseapp.com/main.html
 
 ## 개발자 정보
 ------------
