@@ -1,16 +1,4 @@
 
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyCWAVUAWvB-E0RlK07DTDqkpd0pBI7wYb0",
-  authDomain: "friendychat-8920d.firebaseapp.com",
-  databaseURL: "https://friendychat-8920d.firebaseio.com",
-  projectId: "friendychat-8920d",
-  storageBucket: "friendychat-8920d.appspot.com",
-  messagingSenderId: "1046597658407"
-};
-
-firebase.initializeApp(config);
-
 function initFirebaseAuth() {
   // Listen to auth state changes.
   firebase.auth().onAuthStateChanged(authStateObserver);
@@ -104,9 +92,6 @@ function geocodeLatLng(geocoder, map, infowindow) {
         });
       }
 
-
-
-
 function handleLocationError(browserHasGeolocation, infowindow, pos) {
   infowindow.setPosition(pos);
   infowindow.setContent(browserHasGeolocation ?
@@ -114,36 +99,6 @@ function handleLocationError(browserHasGeolocation, infowindow, pos) {
                         'Error: Your browser doesn\'t support geolocation.');
   infowindow.open(map);
 }
-
-/**
-* Reference to Firebase database.
-* @const
-*/
-/**
-* Data object to be written to Firebase.
-*/
-var data = {
-  sender: null,
-  timestamp: null,
-  address: null
-};
-
-/**
-* Starting point for running the program. Authenticates the user.
-* @param {function()} onAuthSuccess - Called when authentication succeeds.
-*/
-
-function initAuthentication(onAuthSuccess) {
-  firebase.authAnonymously(function(error, authData) {
-    if (error) {
-      console.log('Login Failed!', error);
-    } else {
-      data.sender = authData.uid;
-      onAuthSuccess();
-    }
-  }, {remember: 'sessionOnly'});  // Users will get a new id for every session.
-}
-
 
 //bookmark
 
