@@ -125,6 +125,7 @@ main, #messages-card {
   display: table-cell;
   width: calc(100% - 40px);
   padding: 5px 0 5px 10px;
+  text-align: left;
 }
 .message-container .name {
   float: right;
