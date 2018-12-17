@@ -30,12 +30,8 @@ function authStateObserver(user) {
 function inhtml(){
   var username = document.getElementById("username");
   username.innerHTML = getUserName();
-  var userPicElement = document.getElementById('user-pic');
-
-  var picUrl = getProfilePicUrl();
-  userPicElement.setAttribute("src",picUrl);
- // userPicElement.style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
 }
+
  // Returns the signed-in user's profile Pic URL.
  function getProfilePicUrl() {
   return firebase.auth().currentUser.photoURL || '/images/profile_placeholder.png';
