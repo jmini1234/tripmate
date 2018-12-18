@@ -10,13 +10,13 @@ https://triptmate.firebaseapp.com**
 
 ## 목차
 
-1. [Tripmate란?](#0.tripmate란?)
-2. [DB 설계 및 프로젝트 구조](1. DB 설계 및 프로젝트 구조)
-3. [FrontEnd](2. FrontEnt)
-4. [Google API](#3. Google API)
-5. [Firebase Service 관리](#4. FirebaseService 관리)
-6. [Page Control](#5. Page Control)
-7. [About US](#6. About US)
+0. [Tripmate란?](https://github.com/jmini1234/tripmate#0-tripmate%EB%9E%80)
+1. [DB 설계 및 프로젝트 구조](https://github.com/jmini1234/tripmate#i-db-%EC%84%A4%EA%B3%84-%EB%B0%8F-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%EC%A1%B0)
+2. [FrontEnd](https://github.com/jmini1234/tripmate#ii-frontend)
+3. [Google API](https://github.com/jmini1234/tripmate#iii-google-api)
+4. [Firebase Service 관리](https://github.com/jmini1234/tripmate#iv-firebase-service-%EA%B4%80%EB%A6%AC)
+5. [Page Control](https://github.com/jmini1234/tripmate#v-page-control)
+6. [About US](https://github.com/jmini1234/tripmate#vi-about-us)
 
 ------
 
