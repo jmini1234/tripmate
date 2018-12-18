@@ -134,7 +134,7 @@ function displayList(roomlist) {
   console.log(roomlist);
   // roomlist = ["Seoul", "Newyork", "Busan"];
   var htmlelt = document.getElementById("lists");
-
+  htmlelt.scrollTop = htmlelt.scrollHeight;
   for(var room in roomlist){
     var divtag = document.createElement( 'div' );
     divtag.innerHTML = List_TEMPLATE_BEFORE + "id = "+roomlist[room]+List_TEMPLATE_AFTER;

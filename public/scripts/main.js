@@ -214,7 +214,7 @@ function authStateObserver(user) {
     // We save the Firebase Messaging Device token and enable notifications.
 
     saveMessagingDeviceToken();
-    setRoom();
+    setRoom(userName);
 
   } else { // User is signed out!
     // Hide user's profile and sign-out button.
@@ -227,17 +227,15 @@ function authStateObserver(user) {
   }
 }
 
-function setRoom(){
+function setRoom(userName){
   var callback= function(snap){
     console.log(snap.val().status);
     getRoom = snap.val().status;
     loadMessages(getRoom);
-    var htmlroom = document.getElementById('roomTitle');
+    console.log(userName);
     htmlroom.innerHTML = getRoom;
-
   }
-  firebase.database().ref('/status/'+getUserName()+'/location').on('value', callback)
-
+  firebase.database().ref('/status/'+userName+'/location').on('value', callback)
 }
 
 // Returns true if user is signed-in. Otherwise false and displays a message.
@@ -409,6 +407,8 @@ var userNameElement = document.getElementById('user-name');
 var signInSnackbarElement = document.getElementById('must-signin-snackbar');
 
 var BookmarkSnackbarElement = document.getElementById('save-bookmark');
+
+var htmlroom = document.getElementById('roomTitle');
 
 // Saves message on form submit.
 messageFormElement.addEventListener('submit', onMessageFormSubmit);
