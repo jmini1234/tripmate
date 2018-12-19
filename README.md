@@ -1092,8 +1092,6 @@ function loadBook() {  // Loads the last 12 messages and listen for new ones.
   - roomlist : 채팅방 생성 및 분리
   - MapApi : google map api 와 firebase 연동하기 
   - converting : 현재 위치 반환 후 , 위도 경도를 주소로 변환
-- 임혜린 (imhyerin) : 지도api
-  - im
 
 ### 2. 협업 과정
 
